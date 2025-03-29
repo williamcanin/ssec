@@ -1,0 +1,14 @@
+[package]
+name = "ssec"
+version = "0.1.0"
+edition = "2024"
+
+# === Windows dependencies only ====
+[target.'cfg(target_os = "windows")'.build-dependencies]
+winres = "0.1.12"
+
+[dependencies]
+rpassword = "7.2.0"
+serde = { version = "1.0.219", features = ["derive"]}
+serde_json = "1.0.140"
+clap = { version = "4", features = ["derive"] }

@@ -1,0 +1,26 @@
+// MAIN ICON "icon.ico"
+
+1 24 "uac.manifest"
+
+1 VERSIONINFO
+    FILEVERSION    0,1,0,00
+    PRODUCTVERSION 0,1,0,00
+{
+    BLOCK "StringFileInfo"
+    {
+        BLOCK "040904b0"
+        {
+            VALUE "CompanyName",        "\0"
+            VALUE "FileDescription",    "Seec - Mounting VeraCrypt volumes efficiently.\0"
+            VALUE "FileVersion",        "0.1.0\0"
+            VALUE "LegalCopyright",     "\251 Seec - William C. Canin Softwares\0"
+            VALUE "OriginalFilename",   "ssec.exe\0"
+            VALUE "ProductName",        "ssec\0"
+            VALUE "ProductVersion",     "0.1.0\0"
+        }
+    }
+    BLOCK "VarFileInfo"
+    {
+        VALUE "Translation", 0x409, 1200
+    }
+}

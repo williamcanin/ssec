@@ -1,0 +1,25 @@
+{
+  "veracrypt": {
+    "path": "C:\\Program Files\\VeraCrypt\\veracrypt.exe"
+  },
+  "ssec": {
+    "volumes": [
+      ["D:\\volume01.tc", "A"],
+      ["D:\\volume02.tc", "B"]
+    ]
+  },
+    "commands": {
+    "mount": {
+      "enable": true,
+      "services": [
+        "sc.exe start nginx"
+      ]
+    },
+    "umount": {
+      "enable": true,
+      "services": [
+        "sc.exe stop nginx"
+      ]
+    }
+  }
+}
