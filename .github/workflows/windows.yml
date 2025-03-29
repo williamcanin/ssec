@@ -1,0 +1,65 @@
+name: Windows Build
+
+on:
+  release:
+    types: [published]
+  push:
+    tags:
+      - 'v*'
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  windows-build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          profile: minimal
+          override: true
+
+      - name: Run Tests
+        run: |
+          cargo test --release --target x86_64-pc-windows-msvc
+          cargo test --release --target i686-pc-windows-msvc
+
+      - name: Create folder release
+        run: mkdir release
+
+      - name: Build Windows Binary x64
+        run: |
+          cargo build --release --target x86_64-pc-windows-msvc
+          copy target\x86_64-pc-windows-msvc\release\ssec.exe release\ssec-x86_64-windows.exe
+
+      - name: Build Windows Binary x32
+        run: |
+          cargo build --release --target i686-pc-windows-msvc
+          copy target\i686-pc-windows-msvc\release\ssec.exe release\ssec-i686-windows.exe
+
+      - name: Upload Windows Binaries
+        uses: actions/upload-artifact@v3
+        with:
+          name: windows-binaries
+          path: release/*
+
+      - name: Upload Windows Binary to Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ./release/ssec-x86_64-windows.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.SSEC_TOKEN }}
+
+      - name: Upload x32 Binary to Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ./release/ssec-i686-windows.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.SSEC_TOKEN }}
