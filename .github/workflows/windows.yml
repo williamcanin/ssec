@@ -45,7 +45,7 @@ jobs:
           copy target\i686-pc-windows-msvc\release\ssec.exe release\ssec-i686-windows.exe
 
       - name: Upload Windows Binaries
-        uses: actions/upload-artifact@v3.1.1
+        uses: actions/upload-artifact@v4
         with:
           name: windows-binaries
           path: release/*
