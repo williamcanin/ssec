@@ -1,6 +1,7 @@
 use crate::config::Config;
 #[cfg(target_os = "windows")]
-use std::{os::windows::process::CommandExt, process::Command};
+use std::os::windows::process::CommandExt;
+use std::process::Command;
 
 pub fn starting(config: &Config) -> Result<(), Box<dyn std::error::Error>> {
   let services = &config.commands.mount.services;
