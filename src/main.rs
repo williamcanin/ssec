@@ -1,5 +1,6 @@
 mod config;
 mod mount;
+mod serv;
 mod umount;
 mod utils;
 use clap::{Parser, Subcommand};
@@ -11,6 +12,10 @@ enum Commands {
   Mount,
   /// Umount the volumes
   Umount,
+  /// Starting services
+  ServeStop,
+  /// Stoping services
+  ServeStart,
 }
 
 fn about() -> String {
@@ -41,6 +46,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
         Some(Commands::Umount) => {
           umount::umount(&config, config.commands.umount.enable)?;
+        }
+        Some(Commands::ServeStart) => {
+          serv::starting(&config)?;
+        }
+        Some(Commands::ServeStop) => {
+          serv::stoping(&config)?;
         }
         None => {
           println!("Use `help` to see the available options.");
