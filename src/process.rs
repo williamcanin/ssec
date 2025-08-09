@@ -1,5 +1,6 @@
 #[cfg(target_os = "windows")]
 pub(crate) mod windows {
+  use crate::utils::capitalize;
   use std::ffi::OsStr;
   use windows::{
     Win32::{
@@ -15,7 +16,6 @@ pub(crate) mod windows {
     },
     core::{PCWSTR, PWSTR},
   };
-  use crate::utils::capitalize;
 
   fn to_pcw_str(s: &str) -> Vec<u16> {
     use std::os::windows::ffi::OsStrExt;
@@ -52,7 +52,7 @@ pub(crate) mod windows {
             "Failed to elevate privileges (err: {})",
             std::io::Error::last_os_error()
           )
-            .into(),
+          .into(),
         );
       }
 
@@ -91,7 +91,8 @@ pub(crate) mod windows {
     let joined = names.join(",");
     let command_line = format!(
       "powershell -Command \"$names='{}' -split ','; foreach ($n in $names) {{ {}-Service -Name $n }}\"",
-      joined, capitalize(action)
+      joined,
+      capitalize(action)
     );
     let mut command_wide: Vec<u16> = command_line.encode_utf16().chain(Some(0)).collect();
 

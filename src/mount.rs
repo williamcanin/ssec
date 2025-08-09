@@ -14,7 +14,8 @@ pub fn mount(config: &Config, has_service: bool) -> Result<(), Box<dyn std::erro
   for volume in &config.ssec.volumes {
     println!("::> Mounting volume {} in {} ...", &volume[0], &volume[1]);
     let child = Command::new(PathBuf::from(&config.veracrypt.path))
-      .args(["/q",
+      .args([
+        "/q",
         "/nowaitdlg",
         "y",
         "/c",
@@ -27,8 +28,10 @@ pub fn mount(config: &Config, has_service: bool) -> Result<(), Box<dyn std::erro
         &volume[1],
         "/a",
         "/p",
-        &password])
-      .output().unwrap();
+        &password,
+      ])
+      .output()
+      .unwrap();
 
     match child.status.code().unwrap() {
       1 => break,

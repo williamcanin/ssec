@@ -1,9 +1,9 @@
 mod config;
 mod mount;
+mod process;
 mod services;
 mod umount;
 mod utils;
-mod process;
 
 use clap::{Parser, Subcommand};
 use std::path::PathBuf;
