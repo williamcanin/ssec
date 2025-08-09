@@ -3,7 +3,10 @@ use std::{error::Error, path::PathBuf, process::Command};
 
 pub fn umount(config: &Config) -> Result<(), Box<dyn Error>> {
   for volume in &config.ssec.volumes {
-    println!("::> Disassembly volume {} ...", &volume[0]);
+    println!(
+      "::> Disassembly volume \"{}\" on drive \"{}:\\\" ...",
+      &volume[0], &volume[1]
+    );
     let child = Command::new(PathBuf::from(&config.veracrypt.path))
       .arg("/d")
       .arg(&volume[1])
