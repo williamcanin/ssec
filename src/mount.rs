@@ -9,7 +9,10 @@ pub fn mount(config: &Config) -> Result<(), Box<dyn Error>> {
   let password = read_password().unwrap();
 
   for volume in &config.ssec.volumes {
-    println!("::> Mounting volume {} in {} ...", &volume[0], &volume[1]);
+    println!(
+      "::> Mounting volume \"{}\" on drive \"{}:\\\" ...",
+      &volume[0], &volume[1]
+    );
     let child = Command::new(PathBuf::from(&config.veracrypt.path))
       .args([
         "/q",

@@ -50,29 +50,23 @@ fn main() -> Result<(), Box<dyn Error>> {
         Some(Commands::Mount) => {
           mount::mount(&config)?;
           if config.commands.mount.enable {
-            std::thread::sleep(std::time::Duration::from_secs(1));
             services::starting(&config)?;
           }
         }
 
         Some(Commands::Umount) => {
           if config.commands.umount.enable {
-            std::thread::sleep(std::time::Duration::from_secs(1));
             services::stoping(&config)?;
           }
           umount::umount(&config)?;
         }
 
         Some(Commands::ServeStart) => {
-          println!("::> Starting services...");
           services::starting(&config)?;
-          println!("::> Services started successfully!");
         }
 
         Some(Commands::ServeStop) => {
-          println!("::> Stopping services...");
           services::stoping(&config)?;
-          println!("::> Services stopped successfully!");
         }
 
         None => {
