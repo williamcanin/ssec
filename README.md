@@ -1,6 +1,6 @@
 # Ssec
 
-Ssec é um programa de linha de comando (CLI) para realizar montagens e desmontagem de volumes do
+Ssec é um programa de linha de comando (CLI) para realizar montagens e desmontagens de volumes do
 [VeraCrypt](https://veracrypt.eu/en/Home.html) de forma automática passando a senha no Windows. Também tem a opção de adicionar
 serviços após a montagem e antes da desmontagem.
 Ssec não resolve volumes que usam `passfile` (senha por arquivo) do VeraCrypt.
