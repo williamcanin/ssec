@@ -11,13 +11,13 @@
     "mount": {
       "enable": true,
       "services": [
-        "sc.exe start NGinx"
+        "NGinx"
       ]
     },
     "umount": {
       "enable": true,
       "services": [
-        "sc.exe stop NGinx"
+        "NGinx"
       ]
     }
   }
