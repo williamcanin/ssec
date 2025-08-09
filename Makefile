@@ -30,6 +30,7 @@ commit:
 
 push: fmt commit
 	@git push -u origin
+	@git push -u hub
 
 build: fmt
 	@cargo build
