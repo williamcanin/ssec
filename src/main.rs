@@ -63,7 +63,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     None => eprintln!("ERROR: Could not get executable directory."),
   }
 
-  utils::read("Press ENTER to exit:".to_string())?;
+  // utils::read("Press ENTER to exit:".to_string())?;
 
   Ok(())
 }

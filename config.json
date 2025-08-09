@@ -4,7 +4,7 @@
   },
   "ssec": {
     "volumes": [
-      ["\\Device\\Harddisk\\Partition2", "D"]
+      ["\\Device\\Harddisk1\\Partition2", "D"]
     ]
   },
     "commands": {
