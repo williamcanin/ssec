@@ -16,9 +16,9 @@ Ssec não resolve volumes que usam `passfile` (senha por arquivo) do VeraCrypt.
 ## Configuração
 
 **1** - Após instalar todas as dependências acima, crie uma pasta em local de sua preferência e
-dentro da mesma crie um arquivo com nome de `config.json` com essa estrutura abaixo:
+dentro da mesma crie um arquivo com nome de `ssec.json` com essa estrutura abaixo:
 
-Exemplo de `config.json`:
+Exemplo de `ssec.json`:
 
 ```json
 {

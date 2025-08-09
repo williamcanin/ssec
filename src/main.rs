@@ -43,7 +43,7 @@ fn main() -> Result<(), Box<dyn Error>> {
 
   match utils::get_executable_dir() {
     Some(dir) => {
-      let json_file = PathBuf::from(&dir).join("config.json");
+      let json_file = PathBuf::from(&dir).join("ssec.json");
       let config: Config = load_config(&PathBuf::from(dir), &json_file)?;
 
       match cli.command {
