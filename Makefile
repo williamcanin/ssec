@@ -20,7 +20,7 @@ commands:
 	@echo     make release --------- Compile code for release
 	@echo     make clean ----------- Delete entire build directory
 	@echo ----------------------------------------------------------
-	@echo     (c) 2025 - Seec - Makefile commands
+	@echo     (c) 2025 - Ssec - Makefile commands
 
 fmt:
 	@cargo fmt
