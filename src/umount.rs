@@ -1,9 +1,9 @@
 use std::{path::PathBuf, process::Command};
 
-use crate::{config::Config, serv};
+use crate::{config::Config, services};
 pub fn umount(config: &Config, has_service: bool) -> Result<(), Box<dyn std::error::Error>> {
   if has_service {
-    serv::stoping(config)?;
+    services::stoping(config)?;
     std::thread::sleep(std::time::Duration::from_secs(1));
   }
 

@@ -14,3 +14,11 @@ pub fn read(message: String) -> Result<String, Box<dyn std::error::Error>> {
   io::stdin().read_line(&mut input)?;
   Ok(message)
 }
+
+pub fn capitalize(s: &str) -> String {
+  let mut chars = s.chars();
+  match chars.next() {
+    Some(first) => first.to_uppercase().collect::<String>() + &chars.as_str().to_lowercase(),
+    None => String::new(),
+  }
+}

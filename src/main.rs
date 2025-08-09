@@ -1,8 +1,10 @@
 mod config;
 mod mount;
-mod serv;
+mod services;
 mod umount;
 mod utils;
+mod process;
+
 use clap::{Parser, Subcommand};
 use std::path::PathBuf;
 
@@ -48,10 +50,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
           umount::umount(&config, config.commands.umount.enable)?;
         }
         Some(Commands::ServeStart) => {
-          serv::starting(&config)?;
+          services::starting(&config)?;
         }
         Some(Commands::ServeStop) => {
-          serv::stoping(&config)?;
+          services::stoping(&config)?;
         }
         None => {
           println!("Use `help` to see the available options.");

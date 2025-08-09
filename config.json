@@ -11,13 +11,15 @@
     "mount": {
       "enable": true,
       "services": [
-        "sc.exe start NGinx"
+        "NGinx",
+				"Gitea"
       ]
     },
     "umount": {
       "enable": true,
       "services": [
-        "sc.exe stop NGinx"
+        "NGinx",
+				"Gitea"
       ]
     }
   }

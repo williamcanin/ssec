@@ -1,5 +1,5 @@
 use crate::config::Config;
-use crate::serv;
+use crate::services;
 use rpassword::read_password;
 use std::io::Write;
 use std::path::PathBuf;
@@ -38,7 +38,7 @@ pub fn mount(config: &Config, has_service: bool) -> Result<(), Box<dyn std::erro
 
   if has_service {
     std::thread::sleep(std::time::Duration::from_secs(1));
-    serv::starting(config)?;
+    services::starting(config)?;
   }
 
   Ok(())
