@@ -6,7 +6,7 @@ mod umount;
 mod utils;
 
 use clap::{Parser, Subcommand};
-use std::path::PathBuf;
+use std::{error::Error, path::PathBuf};
 
 #[derive(Subcommand)]
 enum Commands {
@@ -26,6 +26,7 @@ fn about() -> String {
     utils::VERSION
   )
 }
+
 #[derive(Parser)]
 #[command(name = "ssec")]
 #[command(version = utils::VERSION)]
@@ -36,30 +37,50 @@ struct Cli {
 }
 
 use config::{Config, load_config};
-fn main() -> Result<(), Box<dyn std::error::Error>> {
+
+fn main() -> Result<(), Box<dyn Error>> {
   let cli = Cli::parse();
+
   match utils::get_executable_dir() {
     Some(dir) => {
       let json_file = PathBuf::from(&dir).join("config.json");
       let config: Config = load_config(&PathBuf::from(dir), &json_file)?;
+
       match cli.command {
         Some(Commands::Mount) => {
-          mount::mount(&config, config.commands.mount.enable)?;
+          mount::mount(&config)?;
+          if config.commands.mount.enable {
+            std::thread::sleep(std::time::Duration::from_secs(1));
+            services::starting(&config)?;
+          }
         }
+
         Some(Commands::Umount) => {
-          umount::umount(&config, config.commands.umount.enable)?;
+          if config.commands.umount.enable {
+            std::thread::sleep(std::time::Duration::from_secs(1));
+            services::stoping(&config)?;
+          }
+          umount::umount(&config)?;
         }
+
         Some(Commands::ServeStart) => {
+          println!("::> Starting services...");
           services::starting(&config)?;
+          println!("::> Services started successfully!");
         }
+
         Some(Commands::ServeStop) => {
+          println!("::> Stopping services...");
           services::stoping(&config)?;
+          println!("::> Services stopped successfully!");
         }
+
         None => {
           println!("Use `help` to see the available options.");
         }
       }
     }
+
     None => eprintln!("ERROR: Could not get executable directory."),
   }
 

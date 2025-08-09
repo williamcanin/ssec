@@ -8,6 +8,7 @@ pub fn get_executable_dir() -> Option<PathBuf> {
     .and_then(|path| path.parent().map(PathBuf::from))
 }
 
+#[allow(dead_code)]
 pub fn read(message: String) -> Result<String, Box<dyn std::error::Error>> {
   println!("{}", message);
   let mut input = String::new();

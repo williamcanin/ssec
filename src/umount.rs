@@ -1,12 +1,7 @@
-use std::{path::PathBuf, process::Command};
+use crate::config::Config;
+use std::{error::Error, path::PathBuf, process::Command};
 
-use crate::{config::Config, services};
-pub fn umount(config: &Config, has_service: bool) -> Result<(), Box<dyn std::error::Error>> {
-  if has_service {
-    services::stoping(config)?;
-    std::thread::sleep(std::time::Duration::from_secs(1));
-  }
-
+pub fn umount(config: &Config) -> Result<(), Box<dyn Error>> {
   for volume in &config.ssec.volumes {
     println!("::> Umounting volume {} ...", &volume[0]);
     let child = Command::new(PathBuf::from(&config.veracrypt.path))

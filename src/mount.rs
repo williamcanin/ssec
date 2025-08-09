@@ -1,11 +1,8 @@
 use crate::config::Config;
-use crate::services;
 use rpassword::read_password;
-use std::io::Write;
-use std::path::PathBuf;
-use std::process::Command;
+use std::{error::Error, io::Write, path::PathBuf, process::Command};
 
-pub fn mount(config: &Config, has_service: bool) -> Result<(), Box<dyn std::error::Error>> {
+pub fn mount(config: &Config) -> Result<(), Box<dyn Error>> {
   print!("Type a password: ");
 
   std::io::stdout().flush().unwrap();
@@ -40,11 +37,6 @@ pub fn mount(config: &Config, has_service: bool) -> Result<(), Box<dyn std::erro
       }
       _ => {}
     }
-  }
-
-  if has_service {
-    std::thread::sleep(std::time::Duration::from_secs(1));
-    services::starting(config)?;
   }
 
   Ok(())
