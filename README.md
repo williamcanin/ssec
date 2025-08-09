@@ -10,8 +10,8 @@ Ssec não resolve volumes que usam `passfile` (senha por arquivo) do VeraCrypt.
 
 ## Dependências
 
-* [VeraCrypt](https://veracrypt.eu/en/Home.html) (Windows)
-* [Microsoft Visual C++ Redistributable](https://learn.microsoft.com/pt-br/cpp/windows/latest-supported-vc-redist?view=msvc-170#visual-studio-2015-2017-2019-and-2022) (Windows)
+* [VeraCrypt](https://veracrypt.eu/en/Home.html) (Windows x64)
+* [Microsoft Visual C++ Redistributable](https://learn.microsoft.com/pt-br/cpp/windows/latest-supported-vc-redist?view=msvc-170#visual-studio-2015-2017-2019-and-2022) (Windows x64)
 
 ## Configuração
 
