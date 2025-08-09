@@ -72,7 +72,7 @@ pub(crate) mod windows {
   }
 
   pub(crate) fn service(
-    name: &str,
+    names: &Vec<String>,
     action: &str,
     as_admin: bool,
     wait: bool,
@@ -88,7 +88,11 @@ pub(crate) mod windows {
       si.wShowWindow = SW_HIDE.0 as u16;
     }
 
-    let command_line = format!("powershell -Command {}-Service -Name {}", capitalize(action), name);
+    let joined = names.join(",");
+    let command_line = format!(
+      "powershell -Command \"$names='{}' -split ','; foreach ($n in $names) {{ {}-Service -Name $n }}\"",
+      joined, capitalize(action)
+    );
     let mut command_wide: Vec<u16> = command_line.encode_utf16().chain(Some(0)).collect();
 
     unsafe {
@@ -125,7 +129,7 @@ pub(crate) mod windows {
           }
           Ok(())
         }
-        Err(e) => Err(format!("Error run command {} (erro: {})", name, e).into()),
+        Err(e) => Err(format!("Error run command {} (erro: {})", command_line, e).into()),
       }
     }
   }
